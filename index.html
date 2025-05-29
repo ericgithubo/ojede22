@@ -1,252 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Professional Internship Card Generator</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      #cardName {
-        color: #1e88e5;
-        font-size: 25px;
-        font-weight: bold;
-        font-family: "Courier New", Courier, monospace;
-      }
 
-      .card-preview {
-        max-width: 500px;
-        margin: 20px auto;
-        padding: 20px;
-        border: 2px solid white;
-        border-radius: 10px;
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professional Internship Card Generator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    #cardName {
+      color: #1e88e5;
+      font-size: 25px;
+      font-weight: bold;
+      font-family: "Courier New", Courier, monospace;
+    }
 
-        background: linear-gradient(to right, #1e88e5, #e9e9e6);
+    .card-preview {
+      max-width: 500px;
+      margin: 20px auto;
+      padding: 20px;
+      border: 2px solid white;
+      border-radius: 10px;
 
-        position: relative;
-        font-family: "Segoe UI", sans-serif;
-      }
+      /* Using a linear gradient with your specified colors */
+      background: linear-gradient(to right,
+          #1e88e5,
+         
+          #e2dccc);
+      /* Example gradient: Blue, Green, Yellow */
 
+      position: relative;
+      font-family: "Segoe UI", sans-serif;
+    }
+
+    .hide-on-print {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 20px;
+    }
+
+    @media print {
       .hide-on-print {
-        display: flex;
-        justify-content: center;
-        gap: 10px;
-        margin: 20px;
+        display: none !important;
       }
+    }
 
-      @media print {
-        .hide-on-print {
-          display: none !important;
-        }
-      }
+    .card-header {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
 
-      .card-header {
-        text-align: center;
-        font-weight: bold;
-        font-size: 1.1rem;
-      }
+    .card-logo img {
+      max-height: 60px;
+    }
 
-      .card-logo img {
-        max-height: 60px;
-      }
+    .user-photo {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+    }
 
-      .user-photo {
-        width: 100px;
-        height: 100px;
-        object-fit: cover;
-        border-radius: 50%;
-      }
+    #qrcode {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+    }
 
-      #qrcode {
-        margin-top: 15px;
-        display: flex;
-        justify-content: center;
-      }
+    .logo-sections {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 30px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+      background-color: white;
+      /* Ensure logo section background is white */
+      border-radius: 12px;
+    }
 
-      .logo-sections {
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-top: 30px;
-        padding-top: 20px;
-        border-top: 1px solid #eee;
-      }
+    .logo-item img {
+      max-height: 60px;
+      width: auto;
+    }
+  </style>
+</head>
 
-      .logo-item img {
-        max-height: 60px;
-        width: auto;
-      }
-    </style>
-  </head>
+<body class="bg-light">
+  <div class="container py-4">
+    <h2 class="text-center mb-4">
+      CodeToInnovate Africa<br /><small class="text-muted">Technology Innovation Support Center - UTC Lira</small>
+    </h2>
+    <h4 class="text-center mb-4">
+      Please use this platform to Generate Internship Card
+    </h4>
 
-  <body class="bg-light">
-    <div class="container py-4">
-      <h2 class="text-center mb-4">
-        CodeToInnovate Africa<br /><small class="text-muted"
-          >Technology Innovation Support Center - UTC Lira</small
-        >
-      </h2>
-      <h4 class="text-center mb-4">
-        Please use this platform to Generate Internship Card
-      </h4>
-
-      <form id="internForm" class="row g-3">
-        <div class="col-md-6">
-          <label class="form-label">Full Name</label>
-          <input type="text" id="fullName" class="form-control" required />
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Username (Optional)</label>
-          <input
-            type="text"
-            id="username"
-            class="form-control"
-            placeholder="@username"
-            pattern="^@.*$"
-          />
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Email Address</label>
-          <input type="email" id="email" class="form-control" required />
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Phone Number</label>
-          <input type="tel" id="phone" class="form-control" required />
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">University/Institution</label>
-          <input type="text" id="school" class="form-control" required />
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Internship Track</label>
-          <select id="department" class="form-select" required>
-            <option value="">Choose...</option>
-            <option value="Software Engineering">Software Development</option>
-            <option value="Information Technology">Cyber Security</option>
-            <option value="Computer Science">Computer Networking</option>
-            <option value="Electrical Engineering">Data Analysis</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Internship Duration</label>
-          <select id="duration" class="form-select" required>
-            <option value="">Choose...</option>
-            <option value="2 Months">2 Months</option>
-            <option value="3 Months">3 Months</option>
-          </select>
-        </div>
-        <div class="col-md-6">
-          <label class="form-label">Upload Your Photo</label>
-          <input
-            type="file"
-            id="photo"
-            accept="image/*"
-            class="form-control"
-            required
-          />
-        </div>
-        <div class="col-12 text-center">
-          <button type="submit" class="btn btn-primary">Generate Card</button>
-        </div>
-      </form>
-
-      <div id="cardSection" class="d-none">
-        <div id="card" class="card-preview mt-4 text-center bg-white shadow">
-          <div class="card-logo mb-2">
-            <img id="cardLogo" src="logo.png" alt="Logo" />
-          </div>
-          <div class="card-header">
-            CodeToInnovate Africa<br />
-            <small>Technology Innovation Support Center - UTC Lira</small>
-          </div>
-          <hr />
-          <img
-            id="cardPhoto"
-            class="user-photo mb-2"
-            src="logo.png"
-            alt="User Photo"
-          />
-          <h5 id="cardName"></h5>
-          <p id="cardUsername" class="text-muted"></p>
-          <p id="cardIdNumber"></p>
-          <p id="cardSchool"></p>
-          <p id="cardDept"></p>
-          <p id="cardDuration"></p>
-          <p id="cardEmail"></p>
-          <p id="cardPhone"></p>
-          <div id="qrcode"></div>
-          <h3 style="margin-top: 16px">In partnership with!</h3>
-
-          <div
-            style="background-color: white; border-radius: 12px"
-            class="logo-sections"
-          >
-            <div class="logo-item">
-              <img
-                id="logo1"
-                src="UTCL Logo.png"
-                alt="Partner Logo 1"
-                class="img-fluid"
-              />
-            </div>
-            <div class="logo-item">
-              <img
-                id="logo2"
-                src="nita.jpg"
-                alt="Partner Logo 2"
-                class="img-fluid"
-              />
-            </div>
-            <div class="logo-item">
-              <img
-                id="logo3"
-                src="RETC-UTC LIRA LOGO.jpg"
-                alt="Partner Logo 3"
-                class="img-fluid"
-              />
-            </div>
-            <div class="logo-item">
-              <img
-                id="logo4"
-                src="stat.png"
-                alt="Partner Logo 4"
-                class="img-fluid"
-              />
-            </div>
-            <div class="logo-item">
-              <img
-                id="logo5"
-                src="19.jpg"
-                alt="Partner Logo 5"
-                class="img-fluid"
-              />
-            </div>
-          </div>
-        </div>
-
-        <div class="hide-on-print">
-          <button onclick="window.print()" class="btn btn-success">
-            Print
-          </button>
-          <button onclick="downloadCard()" class="btn btn-secondary">
-            Download
-          </button>
-        </div>
+    <form id="internForm" class="row g-3">
+      <div class="col-md-6">
+        <label class="form-label">Full Name</label>
+        <input type="text" id="fullName" class="form-control" required />
       </div>
+      <div class="col-md-6">
+        <label class="form-label">Username (Optional)</label>
+        <input type="text" id="username" class="form-control" placeholder="@username" pattern="^@.*$" />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Email Address</label>
+        <input type="email" id="email" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Phone Number</label>
+        <input type="tel" id="phone" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">University/Institution</label>
+        <input type="text" id="school" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Internship Track</label>
+        <select id="department" class="form-select" required>
+          <option value="">Choose...</option>
+          <option value="Software Engineering">Software Development</option>
+          <option value="Information Technology">Cyber Security</option>
+          <option value="Computer Science">Computer Networking</option>
+          <option value="Electrical Engineering">Data Analysis</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Internship Duration</label>
+        <select id="duration" class="form-select" required>
+          <option value="">Choose...</option>
+          <option value="2 Months">2 Months</option>
+          <option value="3 Months">3 Months</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label class="form-label">Upload Your Photo</label>
+        <input type="file" id="photo" accept="image/*" class="form-control" required />
+      </div>
+      <div class="col-12 text-center">
+        <button type="submit" class="btn btn-primary">Generate Card</button>
+      </div>
+    </form>
+
+    <div id="errorMessage" class="alert alert-danger d-none mt-3" role="alert">
+      An error occurred: <span id="errorDetails"></span>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script>
-      const defaultLogoSrc = "logo.png";
+    <div id="cardSection" class="d-none">
+      <div id="card" class="card-preview mt-4 text-center bg-white shadow">
+        <div class="card-logo mb-2">
+          <img id="cardLogo" src="logo.png" alt="Logo"
+            onerror="this.src='https://placehold.co/60x60/cccccc/000000?text=Logo';" />
+        </div>
+        <div class="card-header">
+          CodeToInnovate Africa<br />
+          <small>Technology Innovation Support Center - UTC Lira</small>
+        </div>
+        <hr />
+        <img id="cardPhoto" class="user-photo mb-2" src="logo.png" alt="User Photo" />
+        <h5 id="cardName"></h5>
+        <p id="cardUsername" class="text-muted"></p>
+        <p id="cardIdNumber"></p>
+        <p id="cardSchool"></p>
+        <p id="cardDept"></p>
+        <p id="cardDuration"></p>
+        <p id="cardEmail"></p>
+        <p id="cardPhone"></p>
+        <div id="qrcode"></div>
+        <h3 style="margin-top: 16px">In partnership with!</h3>
 
-      document
-        .getElementById("internForm")
-        .addEventListener("submit", function (e) {
-          e.preventDefault();
+        <div style="background-color: white; border-radius: 12px" class="logo-sections">
+          <div class="logo-item">
+            <img id="logo1" src="UTCL Logo.png" alt="Partner Logo 1" class="img-fluid"
+              onerror="this.src='https://placehold.co/60x60/cccccc/000000?text=Logo1';" />
+          </div>
+          <div class="logo-item">
+            <img id="logo2" src="nita.jpg" alt="Partner Logo 2" class="img-fluid"
+              onerror="this.src='https://placehold.co/60x60/cccccc/000000?text=Logo2';" />
+          </div>
+          <div class="logo-item">
+            <img id="logo3" src="RETC-UTC LIRA LOGO.jpg" alt="Partner Logo 3" class="img-fluid"
+              onerror="this.src='https://placehold.co/60x60/cccccc/000000?text=Logo3';" />
+          </div>
+          <div class="logo-item">
+            <img id="logo4" src="stat.png" alt="Partner Logo 4" class="img-fluid"
+              onerror="this.src='https://placehold.co/60x60/cccccc/000000?text=Logo4';" />
+          </div>
+          <div class="logo-item">
+            <img id="logo5" src="19.jpg" alt="Partner Logo 5" class="img-fluid"
+              onerror="this.src='https://placehold.co/60x60/cccccc/000000?text=Logo5';" />
+          </div>
+        </div>
+      </div>
 
+      <div class="hide-on-print">
+        <button onclick="window.print()" class="btn btn-success">
+          Print
+        </button>
+        <button onclick="downloadCard()" class="btn btn-secondary">
+          Download
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script>
+    const defaultLogoSrc = "logo.png";
+
+    document
+      .getElementById("internForm")
+      .addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Hide any previous error messages
+        document.getElementById("errorMessage").classList.add("d-none");
+        document.getElementById("errorDetails").textContent = "";
+
+        try {
           const fullName = document.getElementById("fullName").value;
           const username = document.getElementById("username").value.trim();
           const email = document.getElementById("email").value;
@@ -255,7 +229,13 @@
           const dept = document.getElementById("department").value;
           const duration = document.getElementById("duration").value;
 
-          const photo = document.getElementById("photo").files[0];
+          const photoInput = document.getElementById("photo");
+          const photo = photoInput.files[0];
+
+          // Validate if a photo is selected
+          if (!photo) {
+            throw new Error("Please upload your photo.");
+          }
 
           const idNumber = Math.floor(100000 + Math.random() * 900000);
 
@@ -279,6 +259,11 @@
           const reader1 = new FileReader();
           reader1.onload = () => {
             document.getElementById("cardPhoto").src = reader1.result;
+          };
+          reader1.onerror = (error) => {
+            console.error("Error reading photo file:", error);
+            document.getElementById("errorMessage").classList.remove("d-none");
+            document.getElementById("errorDetails").textContent = "Could not read photo file.";
           };
           reader1.readAsDataURL(photo);
 
@@ -309,19 +294,31 @@
           });
 
           document.getElementById("cardSection").classList.remove("d-none");
-        });
+          console.log("Card section should now be visible.");
 
-      function downloadCard() {
-        const card = document.getElementById("card");
-        html2canvas(card).then((canvas) => {
-          const link = document.createElement("a");
-          link.download = "internship_card.png";
-          link.href = canvas.toDataURL();
-          link.click();
-        });
-      }
-    </script>
+        } catch (error) {
+          console.error("Error generating card:", error);
+          document.getElementById("errorMessage").classList.remove("d-none");
+          document.getElementById("errorDetails").textContent = error.message;
+        }
+      });
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-  </body>
+    function downloadCard() {
+      const card = document.getElementById("card");
+      html2canvas(card).then((canvas) => {
+        const link = document.createElement("a");
+        link.download = "internship_card.png";
+        link.href = canvas.toDataURL();
+        link.click();
+      }).catch(error => {
+        console.error("Error downloading card:", error);
+        document.getElementById("errorMessage").classList.remove("d-none");
+        document.getElementById("errorDetails").textContent = "Error downloading card image.";
+      });
+    }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</body>
+
 </html>
