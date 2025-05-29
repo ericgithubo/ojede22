@@ -24,8 +24,8 @@
       /* Using a linear gradient with your specified colors */
       background: linear-gradient(to right,
           #1e88e5,
-         
-          #e2dccc);
+          #43a047,
+          #ffc107);
       /* Example gradient: Blue, Green, Yellow */
 
       position: relative;
@@ -272,17 +272,8 @@
           const qrcodeDiv = document.getElementById("qrcode");
           qrcodeDiv.innerHTML = "";
 
-          const internData = {
-            fullName: fullName,
-            username: username,
-            email: email,
-            phone: phone,
-            idNumber: idNumber,
-            school: school,
-            department: dept,
-            duration: duration,
-          };
-          const qrCodeText = JSON.stringify(internData);
+          // *** IMPORTANT FIX: Reduce QR code data to just the ID number ***
+          const qrCodeText = String(idNumber);
 
           new QRCode(qrcodeDiv, {
             text: qrCodeText,
@@ -290,7 +281,7 @@
             height: 100,
             colorDark: "#000000",
             colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H,
+            correctLevel: QRCode.CorrectLevel.H, // High error correction level
           });
 
           document.getElementById("cardSection").classList.remove("d-none");
