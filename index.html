@@ -77,13 +77,19 @@
       padding-top: 20px;
       border-top: 1px solid #eee;
       background-color: white;
-      /* Ensure logo section background is white */
+     
       border-radius: 12px;
     }
 
     .logo-item img {
-      max-height: 60px;
+      max-height: 50px;
       width: auto;
+    }
+
+    #logo1{
+      max-height: 50px;
+      width: auto;
+
     }
   </style>
 </head>
@@ -122,10 +128,10 @@
         <label class="form-label">Internship Track</label>
         <select id="department" class="form-select" required>
           <option value="">Choose...</option>
-          <option value="Software Engineering">Software Development</option>
-          <option value="Information Technology">Cyber Security</option>
-          <option value="Computer Science">Computer Networking</option>
-          <option value="Electrical Engineering">Data Analysis</option>
+          <option value="Software Development">Software Development</option>
+          <option value="Cyber Security">Cyber Security</option>
+          <option value="Computer Networking">Computer Networking</option>
+          <option value="Data Analysis">Data Analysis</option>
         </select>
       </div>
       <div class="col-md-6">
@@ -173,8 +179,8 @@
         <h3 style="margin-top: 16px">In partnership with!</h3>
 
         <div style="background-color: white; border-radius: 12px" class="logo-sections">
-          <div class="logo-item">
-            <img id="logo1" src="UTCL Logo.png" alt="Partner Logo 1" class="img-fluid"
+          <div class="logo-ite">
+            <img id="logo1" src="uu-removebg-preview.png" alt="Partner Logo 1" class="img-fluid"
               onerror="this.src='https://placehold.co/60x60/cccccc/000000?text=Logo1';" />
           </div>
           <div class="logo-item">
@@ -280,7 +286,7 @@
             height: 100,
             colorDark: "#000000",
             colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H, // High error correction level
+            correctLevel: QRCode.CorrectLevel.H, 
           });
 
           document.getElementById("cardSection").classList.remove("d-none");
